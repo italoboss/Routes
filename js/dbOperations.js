@@ -5,7 +5,7 @@ var dbUser = "postgres";
 var dbPass = "1234";
 var dbHost = "localhost";
 var dbPort = "5432";
-var herokuDB = "postgres://zajznmjxbomzkp:35ad65d4aaafd82b2f11534c6c3798e164310c29471a231c5227920f0b18289b@ec2-23-23-248-162.compute-1.amazonaws.com:5432/d6nsf8mhnqgbje";
+var herokuDB = "pg://zajznmjxbomzkp:35ad65d4aaafd82b2f11534c6c3798e164310c29471a231c5227920f0b18289b@ec2-23-23-248-162.compute-1.amazonaws.com:5432/d6nsf8mhnqgbje";
 //var conString = process.env.DATABASE_URL || "pg://"+dbUser+":"+dbPass+"@"+dbHost+":"+dbPort+"/"+dbName;
 var conString = process.env.DATABASE_URL || herokuDB;
 
