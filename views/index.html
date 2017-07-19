@@ -1,0 +1,76 @@
+<html ng-app="routes">
+<head>
+    <meta charset="UTF-8">
+	  <title>Routes</title>
+	  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css" integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+   crossorigin="">
+    <link rel="stylesheet" href="lib/leaflet-routing-machine/leaflet-routing-machine.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/leaflet/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+   crossorigin=""></script>
+    <script src="lib/leaflet-routing-machine/leaflet-routing-machine.min.js"></script>
+    <script src="controllers/routesCtrl.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+	<div class="container" ng-controller="routesCtrl">
+
+		<div class="row clearfix">
+			<div id="top-bar">
+				<div id="top-bar-content">
+              <span><i class="material-icons w3-large">map</i> Routes</span>
+              <button class="btn btn-danger btn-xs" ng-click="doLogout()"> Log out </button>
+              <button class="btn btn-success btn-xs" ng-click="newRouteClick()"> Add Route </button>
+				</div>
+			</div>
+		</div>
+
+        <div class="row clearfix" ng-show="addClicked">
+            <label>New Route</label>
+            <div class="form-inline">
+                <!-- <textarea id="noteContent" name="noteContent"  placeholder="Seu texto aqui" ng-model="noteContent"
+                       type="text" class="form-control"> </textarea> -->
+                <div class="input-group">
+                  <span class="input-group-addon"> Name </span>
+                  <input class="form-control" placeholder="Input a name" type="text" name="routeName" ng-model="newRoute.name">
+                </div>
+                <div class="input-group" >
+                  <span class="input-group-addon">Vehicle</span>
+                  <input class="form-control" type="text" name="routeVehicle" ng-model="newRoute.vehicle_id">
+                </div>
+                <div class="input-group" >
+                  <button ng-click="addRoute()" class="btn btn-primary" ng-disabled="false">Save</button>
+                </div>
+            </div>
+            <span class="text-muted">Click on map to add a 'stop'.</span>
+        </div>
+
+        <div class="row clearfix" ng-hide="addClicked">
+
+             <select ng-model="selectedRoute" ng-change="updateMap()">
+               <option value="0"> Select a route </option>
+               <option ng-repeat="route in dataset" value="{{route.id}}"> {{ route.name }} </option>
+             </select>
+
+             <button ng-click="delRoute()" class="btn btn-danger btn-xs btn-right" ng-hide="selectedRoute == 0">Delete</button>
+        </div>
+
+        <div class="row clearfix">
+
+           <div id="routesMap"></div>
+
+           <!-- <div ng-repeat="note in dataset">
+            	<div class="div-note" ng-class="note.color" ng-mouseover="hoverIn()" ng-mouseleave="hoverOut()">
+                    <span title="Deletar esta nota" class="div-note-bt" ng-show="isHover" ng-click="delNote(note.note_id)">
+                        <i class="material-icons w3-large">delete</i>
+                    </span>
+                    {{note.content}}
+            	</div>
+            </div> -->
+        </div>
+    </div>
+</body>
+</html>
