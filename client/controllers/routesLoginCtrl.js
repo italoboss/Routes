@@ -4,7 +4,7 @@ angular.module('routesLogin').controller('routesLoginCtrl', function($scope, $ht
      * Funcao para autenticar, conectar um usuario e redirecionar para a pagina principal.
      */
     $scope.connect = function() {
-        $http({method: 'POST', url: '/db/doLogin?login=' + $scope.login + '&password=' + $scope.password}).
+        $http({method: 'POST', url: '/db/doLogin', data: {login: $scope.login, password: $scope.password} }).
             success(function(data, status) {
                 if (data != 'Success')
                 	$scope.errorMsg = data;
@@ -15,7 +15,7 @@ angular.module('routesLogin').controller('routesLoginCtrl', function($scope, $ht
                 $scope.errorMsg = data || "Falha em conectar.";
             });
     }
-    
+
     /*
      * Funcao para verificar se foi teclado o 'enter'.
      */

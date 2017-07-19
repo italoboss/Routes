@@ -8,6 +8,11 @@ var dbOperations = require("./js/dbOperations.js");
 var logFmt = require("logfmt");
 
 app.use(session({secret: '1234567890QWERTY'}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+
 app.set('views', __dirname + '/views');
 app.get('/' , function(req, res) {
     if (req.session.user) {
@@ -30,12 +35,6 @@ app.post('/db/read/routes', function(req, res){
 app.get('/db/read/stops', function(req, res){
     dbOperations.getStopsOfRoute(req, res);
 });
-
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-app.use(bodyParser.json());
-
 app.post('/db/add/route', function(req, res){
     dbOperations.addRoute(req, res);
 });

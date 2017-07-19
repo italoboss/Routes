@@ -13,9 +13,10 @@ module.exports = {
      * Funcao para validar um usuario cadastrado atraves dos campos 'login' e 'password'.
      */
     validateUser: function(req, res) {
+        var user = req.body;
         var client = new pg.Client(conString);
         client.connect();
-        var query = client.query("SELECT * FROM users WHERE login = $1", [req.query.login]);
+        var query = client.query("SELECT * FROM users WHERE login = $1", [user.login]);
         query.on("row", function (row, result) {
             result.addRow(row);
         });
@@ -28,7 +29,7 @@ module.exports = {
             }
             else {
                 var aux = result.rows[0];
-                if (aux.password == req.query.password) {
+                if (aux.password == user.password) {
                     req.session.user = aux;
                     res.write('Success');
                     res.end();
