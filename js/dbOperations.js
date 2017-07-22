@@ -7,8 +7,15 @@ var dbHost = "localhost";
 var dbPort = "5432";
 var herokuDB = "pg://zajznmjxbomzkp:35ad65d4aaafd82b2f11534c6c3798e164310c29471a231c5227920f0b18289b@ec2-23-23-248-162.compute-1.amazonaws.com:5432/d6nsf8mhnqgbje";
 //var conString = process.env.DATABASE_URL || "pg://"+dbUser+":"+dbPass+"@"+dbHost+":"+dbPort+"/"+dbName;
-var conString = process.env.DATABASE_URL || herokuDB;
-pg.defaults.ssl = true;
+//var conString = process.env.DATABASE_URL || herokuDB;
+var conString = {
+  user: "zajznmjxbomzkp",
+  password: "35ad65d4aaafd82b2f11534c6c3798e164310c29471a231c5227920f0b18289b",
+  database: "d6nsf8mhnqgbje",
+  port: 5432,
+  host: "ec2-23-23-248-162.compute-1.amazonaws.com",
+  ssl: true
+};
 
 // FUNCOES DE OPERACOES COM O BANCO DE DADOS
 module.exports = {
